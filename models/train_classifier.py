@@ -3,8 +3,8 @@ Disaster response pipeline project
 functions to train the model on preprocessed data
 
 Sample Script Execution:
-> python models/train_classifier.py ../data/DisasterResponse.db models/classifier.pkl
-when providing the database path please provide the absolute path
+> python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+when providing the database path please provide the folder which contains all folders as root or else provide the absolute paths
 """
 import sys
 import pandas as pd
@@ -22,7 +22,6 @@ from sklearn.metrics import fbeta_score, classification_report
 from scipy.stats.mstats import gmean
 from sklearn.ensemble import AdaBoostClassifier
 
-# nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 
 
 def load_data(database_filepath):
@@ -73,28 +72,6 @@ def tokenize(text):
     return clean_tokens
 
 
-class starting_verb_extractor(BaseEstimator, TransformerMixin):
-    """
-    custom transformer to create a new feature - starting verb of a sentence
-    """
-
-    def starting_verb(self, text):
-        sentence_list = nltk.sent_tokenize(text)
-        for sentence in sentence_list:
-            pos_tags = nltk.pos_tag(tokenize(sentence))
-            first_word, first_tag = pos_tags[0]
-            if first_tag in ['VB', 'VBP'] or first_word == 'RT':
-                return True
-        return False
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        X_tagged = pd.Series(X).apply(self.starting_verb)
-        return pd.DataFrame(X_tagged)
-
-
 def build_pipeline():
     """
     building a pipeline to process the text data including
@@ -107,19 +84,10 @@ def build_pipeline():
         pipeline to apply to text which process and apply a classifier
     """
     pipeline = Pipeline([
-        ('features', FeatureUnion([
-
-            ('text_pipeline', Pipeline([
                 ('count_vectorizer', CountVectorizer(tokenizer=tokenize)),
-                ('tfidf_transformer', TfidfTransformer())
-            ])),
-
-            ('starting_verb_transformer', starting_verb_extractor())
-        ])),
-
-        ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
-    ])
-
+                ('tfidf_transformer', TfidfTransformer()),
+                ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
+            ])
     return pipeline
 
 
