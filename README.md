@@ -36,6 +36,7 @@ pip install -r requirements.txt
 
 ### Executing Program:
 1. Make the disaster_reponse_pipline folder as the root folder
+- 
 	|-disaster_reponse_pipline
 		|-app
 		|-data
