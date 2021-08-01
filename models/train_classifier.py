@@ -92,12 +92,7 @@ def build_pipeline():
         'classifier__estimator__learning_rate': [0.75, 1.0],
         'count_vectorizer__max_features': [30000],
     }
-    # parameters ={
-    #     'clf__estimator__learning_rate': [0.75, 1.0],
-    #     'clf__estimator__n_estimators': [50, 75]
-    # }
     cv = GridSearchCV(pipeline, parameters,
-                      # scoring = 'recall_macro',
                     cv = 3,
                       n_jobs=-1)
     return cv
