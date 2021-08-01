@@ -13,8 +13,7 @@ import pickle
 from sqlalchemy import create_engine
 import re
 import nltk
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.pipeline import Pipeline, FeatureUnion
@@ -88,7 +87,20 @@ def build_pipeline():
                 ('tfidf_transformer', TfidfTransformer()),
                 ('classifier', MultiOutputClassifier(AdaBoostClassifier()))
             ])
-    return pipeline
+    parameters = {
+        'classifier__estimator__n_estimators': [20, 50],
+        'classifier__estimator__learning_rate': [0.75, 1.0],
+        'count_vectorizer__max_features': [30000],
+    }
+    # parameters ={
+    #     'clf__estimator__learning_rate': [0.75, 1.0],
+    #     'clf__estimator__n_estimators': [50, 75]
+    # }
+    cv = GridSearchCV(pipeline, parameters,
+                      # scoring = 'recall_macro',
+                    cv = 3,
+                      n_jobs=-1)
+    return cv
 
 
 def evaluate_pipeline(pipeline, X_test, Y_test, category_names):

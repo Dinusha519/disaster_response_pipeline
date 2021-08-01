@@ -4,7 +4,7 @@ functions to pre-process data : run ETL pipeline that cleans data and stores in 
 
 Sample Script Execution:
 - To run ETL pipeline that cleans data and stores in database:
-> python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+    > python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
 """
 
 # import packages
@@ -49,6 +49,8 @@ def clean_data(df):
     for column in categories:
         categories[column] = categories[column].str[-1]
         categories[column] = categories[column].astype(int)
+        # convert to binary
+        categories.loc[categories[column] > 1, column] = 1
     # drop the column - categories and concatenate the cleaned set of splitted columns
     df = df.drop('categories', axis=1)
     df = pd.concat([df, categories], axis=1)
