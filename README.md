@@ -35,29 +35,16 @@ pip install -r requirements.txt
 ```
 
 ### Executing Program:
-1. Create the disaster_response_pipleine folder as the root folder
-|-disaster_response_pipeline
-	|-app
-	   |-..
-	|-data
-	   |-..
-	|-images
-	   |-..
-	|-models
-	   |-..
-	|-README.md
-	|-requirements.txt
-
-
-2.Run the following commands to set up the database and model:
+1. Run the following commands to set up the database and model:
     - To run the ETL pipeline that cleans and stores the data: 
 -       python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
-3. Run the ML pipeline that trains and saves the classifier: 
+2. Run the ML pipeline that trains and saves the classifier: 
 -       python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
-4. Run the following command in the app's directory to run the web app. 
+
+3. Run the following command in the app's directory to run the web app. 
 -       python run.py
 
-5. To Access the web app navigate to
+4. To Access the web app navigate to
  http://0.0.0.0:3001/
 
 
