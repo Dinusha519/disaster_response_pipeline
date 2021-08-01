@@ -35,15 +35,7 @@ pip install -r requirements.txt
 ```
 
 ### Executing Program:
-1. Make the disaster_reponse_pipline folder as the root folder
-- 
-	|-disaster_reponse_pipline
-		|-app
-		|-data
-		|-images
-		|-models
-		|-README.md
-		|-requirements.txt
+1. Make the disaster_reponse_pipline folder as the root folder which contains the folders app, data, mages, models, README.md and requirements.txt
 
 2. Run the following commands to set up the database and model:
     - To run the ETL pipeline that cleans and stores the data: 
