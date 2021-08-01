@@ -35,16 +35,25 @@ pip install -r requirements.txt
 ```
 
 ### Executing Program:
-1. Run the following commands to set up the database and model:
+1. Make the disaster_reponse_pipline folder as the root folder
+	|-disaster_reponse_pipline
+		|-app
+		|-data
+		|-images
+		|-models
+		|-README.md
+		|-requirements.txt
+
+2. Run the following commands to set up the database and model:
     - To run the ETL pipeline that cleans and stores the data: 
 -       python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
-2. Run the ML pipeline that trains and saves the classifier: 
+3. Run the ML pipeline that trains and saves the classifier: 
 -       python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 
-3. Run the following command in the app's directory to run the web app. 
+4. Run the following command in the app's directory to run the web app. 
 -       python run.py
 
-4. To Access the web app navigate to
+5. To Access the web app navigate to
  http://0.0.0.0:3001/
 
 
@@ -71,5 +80,6 @@ pip install -r requirements.txt
 2. After clicking on the classify Message, we can see the categories which the message belongs to highlighted
 ![alt text](https://github.com/Dinusha519/disaster_response_pipeline/blob/main/images/messages.png)
 3. The main page shows some graphs about training dataset used to classify the messages
-![alt text](https://github.com/Dinusha519/disaster_response_pipeline/blob/main/images/distributions.png)
+![alt text](https://github.com/Dinusha519/disaster_response_pipeline/blob/main/images/distribution_categories.png)
+![alt text](https://github.com/Dinusha519/disaster_response_pipeline/blob/main/images/distribution_genre.png)
 
